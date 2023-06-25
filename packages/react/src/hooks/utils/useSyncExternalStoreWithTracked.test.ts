@@ -10,9 +10,7 @@ function createExternalStore<State>(initialState: State) {
   return {
     set(updater: (state: State) => State) {
       currentState = updater(currentState)
-      ReactDOM.unstable_batchedUpdates(() => {
         listeners.forEach((listener) => listener())
-      })
     },
     subscribe(listener: () => void) {
       listeners.add(listener)
